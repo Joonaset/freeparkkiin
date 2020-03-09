@@ -1,22 +1,39 @@
 const express = require('express')
+const mysql = require('mysql')
 const app = express()
 const port = 3000
+const dbuser = process.env.DBUSER
+const dbpass = process.env.DBPASS
 
-app.get('/spots', (req, res) => {
-  var params = new URL(req.url, 'localhost:3000/').searchParams
-  res.send(params)
+console.log(dbuser + dbpass)
+
+var con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'ParkDB'
 })
 
-app.put('/spots', (req, res) => {
+app.route('/spots')
+  .get(async function (req, res) {
+    var sql = 'SELECT * from Spots WHERE Flag < 5'
+    con.query(sql, await function (err, result, fields) {
+      if (err) throw err
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(result))
+    })
+  })
 
-})
+  .put((req, res) => {
 
-app.delete('/spots', (req, res) => {
+  })
 
-})
+  .delete((req, res) => {
 
-app.post('/spots', (req, res) => {
-  res.send('POST request to spots')
-})
+  })
+
+  .post((req, res) => {
+    res.send('POST request to spots')
+  })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
