@@ -6,7 +6,7 @@ CREATE TABLE Spots (
 		Longitude FLOAT(40),
 		Address VARCHAR(40),
 		Hours INT,
-		Flag INT,
+		Flag INT DEFAULT 0,
 		Image VARCHAR(255),
 		Restricted_Days VARCHAR(50),
 		PRIMARY KEY (ID)
