@@ -13,47 +13,51 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script type="text/javascript" src ="addParking.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8" id="mapBox">
-            <h1>höpöhopö</h1>
-        </div>
-        <div class="col-md-4" id="formBox">
-            <form>
-                <div class="form-group">
-                    <label for="inputAddress">Osoite: </label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Jekkukatu 7">
-                </div>
-                <div class="form-group">
-                    <label for="inputLatitude">X-koord</label>
-                    <input type="text" class="form-control" id="inputLatitude" placeholder="50.0">
-                </div>
-                <div class="form-group">
-                    <label for="inputLongitude">Y-koord</label>
-                    <input type="text" class="form-control" id="inputLongitude" placeholder="40.0">
-                </div>
-                <div class="form-group">
-                    <label for="inputFlag">Liputettu asiattomaksi</label>
-                    <input type="text" class="form-control" id="inputFlag" placeholder="10">
-                </div>
-                <div class="form-group">
-                    <label for="inputRestrictedDays">Rajoitetut päivät</label>
-                    <input type="text" class="form-control" id="inputRestrictedDays" placeholder="MA TI KE TO PE LA">
-                </div>
-                <div class="form-group">
-                    <label for="inputHours">Tunnit</label>
-                    <input type="text" class="form-control" id="inputHours" placeholder="8">
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" id="mapBox">
+                <script>getMap()</script>
+                <h1>Kartta latautuu</h1>
+            </div>
+            <div class="col-md-4" id="formBox">
+                <form>
+                    <div class="form-group">
+                        <label for="inputAddress">Osoite: </label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="Jekkukatu 7">
+                    </div>
+                    <div class="form-group">
+                        <p id="Latitude">X-koordinaatti:</p>
+                    </div>
+                    <div class="form-group">
+                        <p id="Longitude">Y-koordinaatti:</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFlag">Liputettu asiattomaksi</label>
+                        <input type="text" class="form-control" id="inputFlag" placeholder="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRestrictedDays">Rajoitetut päivät</label>
+                        <input type="text" class="form-control" id="inputRestrictedDays" placeholder="MA TI KE TO PE LA">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputHours">Tunnit</label>
+                        <input type="text" class="form-control" id="inputHours" placeholder="8">
+                    </div>
 
 
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+                    <!--<button type="submit" class="btn btn-default">Submit</button>-->
+
+                </form>
+                <button onclick="removeMarker()">Peruuta</button>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
