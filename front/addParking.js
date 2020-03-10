@@ -7,6 +7,19 @@ var mark ={};
 var saveLat = null, saveLng = null;
 var myMap;
 
+function hideButton(){
+    const element = document.querySelector('#formBox');
+    const style = getComputedStyle(element);
+    console.log(style.display);
+    if(style.display != 'none'){
+        document.getElementById('formBox').style.display = 'none';
+    }
+    else{
+        document.getElementById('formBox').style.display = 'inline-grid';
+    }
+
+}
+
 function getMap() {
     if (mapOn == false){
      myMap = L.map(document.getElementById("mapBox")).setView([lat, long], 11);
@@ -39,7 +52,7 @@ function addMarker(){
     myMap.setView([saveLat, saveLng]);
     document.getElementById("Latitude").innerText += (" " +saveLat);
     document.getElementById("Longitude").innerText += (" " +saveLng);
-
+    document.getElementById("removeButton").disabled = false;
 }
 
 function removeMarker() {
@@ -49,4 +62,5 @@ function removeMarker() {
     clicked = false;
     document.getElementById("Latitude").innerText = ("X-koordinaatti:");
     document.getElementById("Longitude").innerText = ("Y-koordinaatti:");
+    document.getElementById("removeButton").disabled = true;
 }
