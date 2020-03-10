@@ -17,12 +17,30 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-8" id="mapBox">
-            <h1>höpöhopö</h1>
+        <div class="col-sm" id="mapBox">
+            <h1 align="center">höpöhopö</h1>
+            <button type="button" id="buttonHide"
+                    onclick="hideButton();">
+                <script type="text/javascript">
+
+                    function hideButton(){
+                        const element = document.querySelector('#formBox');
+                        const style = getComputedStyle(element);
+                        console.log(style.display);
+                        if(style.display != 'none'){
+                            document.getElementById('formBox').style.display = 'none';
+                        }
+                        else{
+                            document.getElementById('formBox').style.display = 'inline-grid';
+                        }
+
+                    }
+                </script>
+                Click Me!</button>
         </div>
-        <div class="col-md-4" id="formBox">
+        <div class="col-sm" id="formBox">
             <form>
                 <div class="form-group">
                     <label for="inputAddress">Osoite: </label>
@@ -35,10 +53,6 @@
                 <div class="form-group">
                     <label for="inputLongitude">Y-koord</label>
                     <input type="text" class="form-control" id="inputLongitude" placeholder="40.0">
-                </div>
-                <div class="form-group">
-                    <label for="inputFlag">Liputettu asiattomaksi</label>
-                    <input type="text" class="form-control" id="inputFlag" placeholder="10">
                 </div>
                 <div class="form-group">
                     <label for="inputRestrictedDays">Rajoitetut päivät</label>
