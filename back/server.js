@@ -16,7 +16,7 @@ var con = mysql.createConnection({
   database: 'ParkDB'
 })
 
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 app.route('/spots')
@@ -38,8 +38,27 @@ app.route('/spots')
   })
 
   .post((req, res) => {
-    res.writeHead(500, { 'Content-Type': 'text/html' })
-    res.end('done')
+    var spot = {
+      Latitude: mysql.escape(req.body.latitude),
+      Longitude: mysql.escape(req.body.longitude),
+      Address: mysql.escape(req.body.address),
+      Hours: mysql.escape(req.body.hours),
+      Restricted_Days: mysql.escape(req.body.days)
+    }
+    if (spot.Hours === 'NULL') {
+      spot.Hours = 0
+    }
+    var sql = 'INSERT INTO Spots SET ?;'
+    if (spot.Latitude === 'NULL' || spot.Longitude === 'NULL') {
+      res.writeHead(501, { 'Content-Type': 'text/html' })
+      res.end('latitude and longitude required')
+      return
+    }
+    con.query(sql, spot, function (err, result, fields) {
+      if (err) throw err
+      res.writeHead(200, { 'Content-Type': 'text/html' })
+      res.end('New entry Inserted')
+    })
   })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
