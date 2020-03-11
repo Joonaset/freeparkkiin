@@ -20,6 +20,15 @@ function addNewPark(info) {
     xmlhttp.open("POST", url, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(JSON.stringify(info));
-    connectServer();
+    reloadMarker(info);
 
+}
+
+function sendPut(id){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("PUT", "http://localhost:8081/spots/?id=" + id, true);
+    console.log("http://localhost:8081/spots/?=" + id)
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.send();
+    connectServer();
 }
