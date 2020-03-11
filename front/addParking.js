@@ -67,8 +67,7 @@ function addSpot() {
         address: document.getElementById('inputAddress').value,
         days: document.getElementById('inputRestrictedDays'.value)
     }
-    console.log(spot)
-    addNewPark(spot)
+    addNewPark(spot);
     removeMarker();
 
 }
