@@ -11,4 +11,4 @@ CREATE TABLE Spots (
 		Restricted_Days VARCHAR(50),
 		PRIMARY KEY (ID)
 );
-INSERT INTO Spots VALUES(NULL ,'60.2500', '25.7300' , 'Myllypurontie 2', '4','0', NULL, 'MA TI KE TO PE LA SU');
+INSERT INTO Spots VALUES(NULL ,'60.222222', '25.05774' , 'Myllypurontie 2', '4','0', NULL, 'MA TI KE TO PE LA SU');

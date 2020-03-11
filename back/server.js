@@ -2,7 +2,8 @@ const express = require('express')
 const mysql = require('mysql')
 const cors = require('cors')
 const app = express()
-const port = 3000
+app.use(cors())
+const port = 8081
 const dbuser = process.env.DBUSER
 const dbpass = process.env.DBPASS
 
@@ -19,8 +20,11 @@ var con = mysql.createConnection({
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
+
+var corsOptions = { origin: '*'}
+
 app.route('/spots')
-  .get(async function (req, res) {
+  .get(cors(corsOptions), async function (req, res) {
     var sql = 'SELECT * from Spots WHERE Flag < 5'
     con.query(sql, await function (err, result, fields) {
       if (err) throw err
@@ -29,15 +33,15 @@ app.route('/spots')
     })
   })
 
-  .put((req, res) => {
+  .put(cors(corsOptions), (req, res) => {
 
   })
 
-  .delete((req, res) => {
+  .delete(cors(corsOptions), (req, res) => {
 
   })
 
-  .post((req, res) => {
+  .post(cors(corsOptions), (req, res) => {
     var spot = {
       Latitude: mysql.escape(req.body.latitude),
       Longitude: mysql.escape(req.body.longitude),
