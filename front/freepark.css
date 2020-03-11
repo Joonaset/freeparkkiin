@@ -1,5 +1,7 @@
 .col-sm{
     height:100vh;
 }
+#coordField1,#coordField2{display:none;}
 #mapBox{background: bisque;}
-#formBox{background: gray; display: none;}
+#formBox{background: lightgray; display: none;}
+.container-fluid{background: lightgray;}

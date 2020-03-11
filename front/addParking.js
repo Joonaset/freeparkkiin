@@ -70,7 +70,7 @@ function addSpot() {
     console.log(spot)
     addNewPark(spot)
     removeMarker();
-    hideButton();
+
 }
 
 function removeMarker() {
