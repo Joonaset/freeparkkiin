@@ -3,7 +3,8 @@ const mysql = require('mysql')
 const url = require('url')
 const cors = require('cors')
 const app = express()
-const port = 3000
+app.use(cors())
+const port = 8081
 const dbuser = process.env.DBUSER
 const dbpass = process.env.DBPASS
 
@@ -20,8 +21,11 @@ var con = mysql.createConnection({
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
+
+var corsOptions = { origin: '*'}
+
 app.route('/spots')
-  .get(async function (req, res) {
+  .get(cors(corsOptions), async function (req, res) {
     var sql = 'SELECT * from Spots;'
     con.query(sql, await function (err, result, fields) {
       if (err) throw err
@@ -30,7 +34,7 @@ app.route('/spots')
     })
   })
 
-  .put( async (req, res) => {
+  .put(cors(corsOptions), (req, res) => {
     var id = url.parse(req.url, true).query.id
     console.log(id)
     var sql = 'UPDATE Spots SET Flag = Flag + 1 WHERE ID = ' + id + ';'
@@ -46,11 +50,11 @@ app.route('/spots')
     })
   })
 
-  .delete((req, res) => {
+  .delete(cors(corsOptions), (req, res) => {
 
   })
 
-  .post(async (req, res) => {
+  .post(cors(corsOptions), (req, res) => {
     var spot = {
       Latitude: mysql.escape(req.body.latitude),
       Longitude: mysql.escape(req.body.longitude),
