@@ -34,10 +34,10 @@ app.route('/spots')
     })
   })
 
-  .put(cors(corsOptions), (req, res) => {
-    var id = url.parse(req.url, true).query.id
-    console.log(id)
-    var sql = 'UPDATE Spots SET Flag = Flag + 1 WHERE ID = ' + id + ';'
+  .put(cors(corsOptions), async (req, res) => {
+    var id = url.parse(req.url, true).query.id;
+    console.log(id);
+    var sql = 'UPDATE Spots SET Flag = Flag + 1 WHERE ID = ' + id + ';';
     con.query(sql, await function (err, result, fields) {
       console.log(sql)
       if (err) {
@@ -54,7 +54,7 @@ app.route('/spots')
 
   })
 
-  .post(cors(corsOptions), (req, res) => {
+  .post(cors(corsOptions), async (req, res) => {
     var spot = {
       Latitude: mysql.escape(req.body.latitude),
       Longitude: mysql.escape(req.body.longitude),

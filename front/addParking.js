@@ -17,7 +17,6 @@ function hideButton(){
     else{
         document.getElementById('formBox').style.display = 'inline-grid';
     }
-
 }
 
 function getMap() {
@@ -46,19 +45,35 @@ function testi(e) {
 }
 
 function addMarker(){
-
+    var popup = L.popup({
+        closeOnClick: false,
+        closeButton: false
+    }).setContent("Valittu paikka")
     clicked = true;
+    hideButton();
     console.log(saveLat + ", " + saveLng);
-    mark = L.marker([saveLat, saveLng]).addTo(myMap).bindPopup("Valittu paikka").openPopup();
-    myMap.setView([saveLat, saveLng]);
+    mark = L.marker([saveLat, saveLng]).addTo(myMap).bindPopup(popup).openPopup();
+    //myMap.setView([saveLat, saveLng]);
     document.getElementById("Latitude").innerText += (" " +saveLat);
     document.getElementById("Longitude").innerText += (" " +saveLng);
     document.getElementById("removeButton").disabled = false;
+}
+
+function addSpot() {
+    var spot = {
+        latitude: saveLat,
+        longitude: saveLng,
+        hours: parseInt(document.getElementById('inputHours').value),
+        address: document.getElementById('inputAddress').value,
+        days: document.getElementById('inputRestrictedDays'.value)
+    }
+    console.log(spot)
+    addNewPark(spot)
+    removeMarker();
     hideButton();
 }
 
 function removeMarker() {
-
     myMap.removeLayer(mark);
     saveLat = null;
     saveLng = null;
