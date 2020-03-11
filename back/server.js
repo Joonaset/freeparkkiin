@@ -1,5 +1,6 @@
 const express = require('express')
 const mysql = require('mysql')
+const url = require('url')
 const cors = require('cors')
 const app = express()
 app.use(cors())
@@ -25,7 +26,7 @@ var corsOptions = { origin: '*'}
 
 app.route('/spots')
   .get(cors(corsOptions), async function (req, res) {
-    var sql = 'SELECT * from Spots WHERE Flag < 5'
+    var sql = 'SELECT * from Spots;'
     con.query(sql, await function (err, result, fields) {
       if (err) throw err
       res.writeHead(200, { 'Content-Type': 'application/json' })
@@ -34,7 +35,19 @@ app.route('/spots')
   })
 
   .put(cors(corsOptions), (req, res) => {
-
+    var id = url.parse(req.url, true).query.id
+    console.log(id)
+    var sql = 'UPDATE Spots SET Flag = Flag + 1 WHERE ID = ' + id + ';'
+    con.query(sql, await function (err, result, fields) {
+      console.log(sql)
+      if (err) {
+        res.writeHead(500, { 'Content-Type': 'text/html' })
+        res.end('Error handling SQL')
+        return
+      }
+      res.writeHead(200, { 'Content-Type': 'text/html' })
+      res.end('Flagged Spot with ID ' + id)
+    })
   })
 
   .delete(cors(corsOptions), (req, res) => {
@@ -58,8 +71,12 @@ app.route('/spots')
       res.end('latitude and longitude required')
       return
     }
-    con.query(sql, spot, function (err, result, fields) {
-      if (err) throw err
+    con.query(sql, spot, await function (err, result, fields) {
+      if (err) {
+        res.writeHead(500, { 'Content-Type': 'text/html' })
+        res.end('Error handling SQL')
+        return
+      }
       res.writeHead(200, { 'Content-Type': 'text/html' })
       res.end('New entry Inserted')
     })
