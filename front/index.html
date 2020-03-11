@@ -23,39 +23,46 @@
     <title>Title</title>
 </head>
 <body>
-<script>connectServer()</script>
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">FreeParkki</a>
-    <button id="hideButton" onclick="hideButton();">Sulje</button>
 </nav>
+<script>connectServer()</script>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm" id="mapBox">
             <script>getMap()</script>
             <h1 align="center">Kartta latautuu...</h1>
-            <button type="button" id="buttonHide" onclick="hideButton();">Click Me!</button>
+
         </div>
-        <div class="col-sm" id="formBox">
+        <div class="col align-self-start" id="formBox">
+            <div class="container-fluid">
+                <div class="row">
+                <div class="col-sm">
             <div class="form-group">
                 <label for="inputAddress">Osoite: </label>
                 <input type="text" class="form-control" id="inputAddress" placeholder="Jekkukatu 7">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="coordField1">
                     <p id="Latitude">X-koordinaatti:</p>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="coordField2">
                     <p id="Longitude">Y-koordinaatti:</p>
                 </div>
             <div class="form-group">
-                <label for="inputRestrictedDays">Rajoitetut päivät</label>
+                <label for="inputRestrictedDays">Voimassaolo päivät: </label>
                 <input type="text" class="form-control" id="inputRestrictedDays" placeholder="MA TI KE TO PE LA">
             </div>
             <div class="form-group">
-                <label for="inputHours">Tunnit</label>
+                <label for="inputHours">Maksimi parkkiaika: </label>
                 <input type="number" class="form-control" id="inputHours" placeholder="8">
             </div>
-            <button id="addButton" onclick="addSpot()">Submit</button>
-            <button id="removeButton" onclick="removeMarker()">Peruuta</button>
+            <button class="btn btn-primary" id="addButton" onclick="addSpot()">Lähetä</button>
+            <button class="btn btn-primary" id="removeButton" onclick="removeMarker()">Peruuta</button>
+                </div>
+                <div class="col-sm"></div>
+                    </div>
+            </div>
             </div>
         </div>
     </div>
