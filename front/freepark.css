@@ -1,3 +1,5 @@
-.col-sm{}
+.col-sm{
+    height:100vh;
+}
 #mapBox{background: bisque;}
-#formBox{background: gray; display: inline-grid;}
+#formBox{background: gray; display: none;}

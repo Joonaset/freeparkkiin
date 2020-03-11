@@ -46,6 +46,7 @@ function testi(e) {
 }
 
 function addMarker(){
+
     clicked = true;
     console.log(saveLat + ", " + saveLng);
     mark = L.marker([saveLat, saveLng]).addTo(myMap).bindPopup("Valittu paikka").openPopup();
@@ -53,9 +54,11 @@ function addMarker(){
     document.getElementById("Latitude").innerText += (" " +saveLat);
     document.getElementById("Longitude").innerText += (" " +saveLng);
     document.getElementById("removeButton").disabled = false;
+    hideButton();
 }
 
 function removeMarker() {
+
     myMap.removeLayer(mark);
     saveLat = null;
     saveLng = null;
@@ -63,4 +66,5 @@ function removeMarker() {
     document.getElementById("Latitude").innerText = ("X-koordinaatti:");
     document.getElementById("Longitude").innerText = ("Y-koordinaatti:");
     document.getElementById("removeButton").disabled = true;
+    hideButton();
 }
