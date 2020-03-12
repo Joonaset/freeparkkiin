@@ -8,7 +8,6 @@ const port = 8081
 const dbuser = process.env.DBUSER
 const dbpass = process.env.DBPASS
 
-
 console.log(dbuser + dbpass)
 
 var con = mysql.createConnection({
@@ -21,8 +20,7 @@ var con = mysql.createConnection({
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-
-var corsOptions = { origin: '*'}
+var corsOptions = { origin: '*' }
 
 app.route('/spots')
   .get(cors(corsOptions), async function (req, res) {
@@ -35,9 +33,9 @@ app.route('/spots')
   })
 
   .put(cors(corsOptions), async (req, res) => {
-    var id = url.parse(req.url, true).query.id;
-    console.log(id);
-    var sql = 'UPDATE Spots SET Flag = Flag + 1 WHERE ID = ' + id + ';';
+    var id = url.parse(req.url, true).query.id
+    console.log(id)
+    var sql = 'UPDATE Spots SET Flag = Flag + 1 WHERE ID = ' + id + ';'
     con.query(sql, await function (err, result, fields) {
       console.log(sql)
       if (err) {
@@ -51,7 +49,7 @@ app.route('/spots')
   })
 
   .delete(cors(corsOptions), (req, res) => {
-
+    res.end('Not yet implemented')
   })
 
   .post(cors(corsOptions), async (req, res) => {
